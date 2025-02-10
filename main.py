@@ -6,7 +6,7 @@ import pandas as pd
 import plotly.graph_objects as go
 import numpy as np
 def get_clean_data():
-    df= pd.read_csv("C:/Users/HP/Downloads/Cancer/Cancerdataset.csv")
+    df= pd.read_csv("https://github.com/Abhishekpn09/Breast-cancer-predictor/blob/master/.devcontainer/Cancerdataset.csv")
     df=df.drop(['Unnamed: 32','id'], axis=1)
     df['diagnosis'].replace({'M':1,'B':0},inplace=True)
     return df
