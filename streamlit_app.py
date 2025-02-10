@@ -126,7 +126,7 @@ def get_radar_chart(input_data):
   return fig
 
 def add_predictions(input_data):
-  model = pickle.load(open("https://github.com/Abhishekpn09/Breast-cancer-predictor/blob/master/.devcontainer/model.pkl", "rb"))
+  model = pickle.load(open("https://raw.githubusercontent.com/Abhishekpn09/Breast-cancer-predictor/master/.devcontainer/model.pkl", "rb"))
   #scaler = pickle.load(open(r"C:/Users/HP/Downloads/Cancer/app/model/scaler.pkl", "rb"))
   scaled_input = get_scaled_values(input_data)
   input_array_scaled = np.array(list(scaled_input.values())).reshape(1, -1)
