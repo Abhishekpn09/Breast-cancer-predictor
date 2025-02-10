@@ -2,6 +2,8 @@ import streamlit as st
 import pickle as pickle
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, classification_report
 import pandas as pd
 import plotly.graph_objects as go
 import numpy as np
@@ -131,7 +133,7 @@ def train_model():
     y = df['diagnosis']
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    model = RandomForestClassifier(n_estimators=100, random_state=42)
+    model = LinearRegression()
     model.fit(X_train, y_train)
     
     return model
