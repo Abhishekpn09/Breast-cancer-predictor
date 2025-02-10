@@ -125,26 +125,32 @@ def get_radar_chart(input_data):
   
   return fig
 
-def add_predictions(input_data):
-  model = pickle.load(open("https://github.com/Abhishekpn09/Breast-cancer-predictor/blob/be101199a3f83775e6496072a09cee49f5e9f6ea/.devcontainer/model.pkl", "rb"))
-  #scaler = pickle.load(open(r"C:/Users/HP/Downloads/Cancer/app/model/scaler.pkl", "rb"))
-  scaled_input = get_scaled_values(input_data)
-  input_array_scaled = np.array(list(scaled_input.values())).reshape(1, -1)
-  prediction = model.predict(input_array_scaled)
+def train_model():
+    df = get_clean_data()
+    X = df.drop(['diagnosis'], axis=1)
+    y = df['diagnosis']
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
- 
-  
-  st.subheader("Cell cluster prediction")
-  st.write("The cell cluster is:")
-
-  if prediction[0] == 0:
-    st.write("<span class='diagnosis benign'>Benign</span>", unsafe_allow_html=True)
-  else:
-    st.write("<span class='diagnosis malicious'>Malicious</span>", unsafe_allow_html=True)
+    model = RandomForestClassifier(n_estimators=100, random_state=42)
+    model.fit(X_train, y_train)
     
-  
-  st.write("Probability of being benign: ", model.predict_proba(input_array_scaled)[0][0])
-  st.write("Probability of being malicious: ", model.predict_proba(input_array_scaled)[0][1])
+    return model
+
+# Train model when app starts
+model = train_model()
+
+def add_predictions(input_data):
+    scaled_input = np.array(list(input_data.values())).reshape(1, -1)
+    prediction = model.predict(scaled_input)
+
+    st.subheader("Cell cluster prediction")
+    if prediction[0] == 0:
+        st.write("Benign")
+    else:
+        st.write("Malignant")
+
+    st.write("Probability of being benign:", model.predict_proba(scaled_input)[0][0])
+    st.write("Probability of being malignant:", model.predict_proba(scaled_input)[0][1])
   
   st.write("This app can assist medical professionals in making a diagnosis, but should not be used as a substitute for a professional diagnosis.")
 
