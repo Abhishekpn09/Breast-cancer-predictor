@@ -1,11 +1,8 @@
-# 📦 Streamlit App Starter Kit 
+# Breast Cancer predictor
 ```
-⬆️ (Replace above with your app's name)
 ```
 
-Description of the app ...
-
-## Demo App
+This app predicts using a machine learning model whether a breast mass is benign or malignant based on the measurements it receives from your cytosis lab. You can also update the measurements by hand using the sliders in the sidebar.
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://app-starter-kit.streamlit.app/)
 
