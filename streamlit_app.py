@@ -1,7 +1,7 @@
 import streamlit as st
 import pickle as pickle
 from sklearn.preprocessing import StandardScaler
-
+from sklearn.model_selection import train_test_split
 import pandas as pd
 import plotly.graph_objects as go
 import numpy as np
